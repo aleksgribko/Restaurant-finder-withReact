@@ -6,9 +6,158 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F2D974;
+  color: #2B222C;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+a {
+  color: #965D62;
+}
+
+button {
+  background-color: #5E4352; 
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;  
+}
+
+
+#list {
+  color: #2B222C;
+  height: 90vh;
+  padding-left: 20px;
+  font-size: 0.8rem;
+  overflow: auto;  
+  top: 62px
+}
+
+.flex-container{
+  display: flex;
+}
+
+#nav{  
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  text-align: center;
+  background-color: #C7956D;
+  margin-bottom: 0px;
+  padding-bottom: auto;
+  padding-top: auto;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 70%; /* Full width (cover the whole page) */
+  height: 90vh; /* Full height (cover the whole page) */
+  top: 10vh; 
+  left: 0;  
+
+  background-color: #F2D974;
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */  
+}
+
+#inOverlay{
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  color: #373B44;   
+  
+}
+
+.restoOnMapName {
+  color: red;
+  font-size: 15px;
+}
+
+.overLayRight{
+  overflow: auto;
+  justify-content: left;  
+  padding-left: 30px;
+  font-size: 1rem;
+}
+.overLayLeft{
+  justify-content: center;
+  align-items: center;
+  padding-left: 30px;
+  width: 50%;
+
+}
+
+.star {
+  color: red;
+}
+
+::-webkit-scrollbar {
+display: none;
+}
+
+.pointerYou{
+  background: url(pics/hungry-man.png) no-repeat center center ;
+  background-size: cover;
+  
+}
+
+.pointerResto{
+  background: url(pics/placeholder.svg) no-repeat center center; 
+  
+}
+
+.pointerRestoFeatured{
+  background: url(pics/maps-and-flags.svg) no-repeat center center;
+
+}
+
+/* Tooltip text */
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.pointerRestoFeatured:hover .tooltiptext {
+  visibility: visible;
+}
+
+.pointerResto:hover .tooltiptext {
+  visibility: visible;
+}
+
+#addRestForm {
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);  
+  margin: 0;
+  display: none; /* Hidden by default */ 
+  background-color: rgba(225,184,102,0.7);  
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */  
+}
+
+.hotel_header {
+  font-size: 1rem;
 }
