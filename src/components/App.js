@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   storeRestaurants(list) {
-    console.log("what is stored", list);
     this.setState({
       listOfRestaurants: list
     });
