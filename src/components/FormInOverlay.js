@@ -45,40 +45,40 @@ class FormInOverlay extends Component {
 		return (
 			<div>
 				<button
-					style={{ height: "50px", width: "100%", marginTop: "10px" }}
+					style={{ height: "50px", marginTop: "10px" }}
+					className="button"
 					onClick={() => $("form").slideToggle(500)}
 				>
 					Leave a review
 				</button>
 				<form
-					style={{
+					className='formInOverlay'
+					style={{											
 						display: "none",
-						fontSize: "1rem",
-						width: "100%",
+						fontSize: "1rem",						
 						paddingTop: "10px"
 					}}
 				>
-					<label>
+					<label style={{textAlign: 'center'}}>
 						Rate this restoraunt:
-						<select onChange={this.handleChangeStars}>
+						<select onChange={this.handleChangeStars} style={{marginLeft: '5px'}}>
 							<option disabled selected value />
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 							<option value="5">5</option>
-						</select>
-						<br />
-					</label>
+						</select>						
+					</label><br />
 					<textarea
 						name="newReview"
 						onChange={this.handleChangeReview}
 					/>
 					<br />
 					<button
+						className="button"
 						style={{
-							height: "50px",
-							width: "100%",
+							height: "50px",							
 							marginTop: "10px"
 						}}
 						onClick={this.receiveReview}

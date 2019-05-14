@@ -48,7 +48,6 @@ class App extends Component {
 
   restaurantUpdate() {
     if (this.state.listOfRestaurants != []) {
-      console.log("Restaurants from App", this.state.listOfRestaurants);
       let restaurants = this.state.listOfRestaurants.map(resto => (
         <OneRestorant
           id={resto.id}
@@ -69,7 +68,7 @@ class App extends Component {
     return (
       <div>
         <Nav />
-        <div className="flex-container" style={{ height: "90vh" }}>
+        <div className="flex-container">
           <MapGoogle
             storeRestaurants={this.storeRestaurants}
             checkZoomFunction={this.checkZoom}

@@ -43,8 +43,7 @@ class OneRestorant extends Component {
 	}
 
 	render() {
-		console.log("reviews in OneRestaurant", this.props);
-
+		
 		return (
 			<div>
 				<Overlay

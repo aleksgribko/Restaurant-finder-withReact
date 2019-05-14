@@ -6,8 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F2D974;
-  color: #2B222C;
+  background-color: #f2d974;
+  color: #2b222c;
 }
 
 code {
@@ -16,41 +16,63 @@ code {
 }
 
 a {
-  color: #965D62;
+  color: #965d62;
 }
 
-button {
-  background-color: #5E4352; 
+p {
+  word-wrap: break-word;
+}
+
+.mapContainer {
+  height: 90vh;
+  width: 70%;
+}
+
+.button {
+  background-color: #5e4352;
   border: none;
   border-radius: 5px;
   color: white;
-  padding: 15px 32px;
+  padding: auto 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;  
+  font-size: 14px;
+  width: 45%;
 }
 
+#findMeButton {
+  background-color: #5e4352;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+}
 
 #list {
-  color: #2B222C;
+  color: #2b222c;
   height: 90vh;
   padding-left: 20px;
   font-size: 0.8rem;
-  overflow: auto;  
-  top: 62px
+  overflow: auto;
+  top: 62px;
+  width: 30%;
 }
 
-.flex-container{
+.flex-container {
   display: flex;
+  height: 90vh;
 }
 
-#nav{  
+#nav {
   display: inline-flex;
   justify-content: space-around;
   width: 100%;
   text-align: center;
-  background-color: #C7956D;
+  background-color: #c7956d;
   margin-bottom: 0px;
   padding-bottom: auto;
   padding-top: auto;
@@ -61,21 +83,19 @@ button {
   position: absolute; /* Sit on top of the page content */
   display: none; /* Hidden by default */
   width: 70%; /* Full width (cover the whole page) */
-  height: 90vh; /* Full height (cover the whole page) */
-  top: 10vh; 
-  left: 0;  
-
-  background-color: #F2D974;
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */  
+  height: 90vh;
+  top: 10vh;
+  left: 0;
+  background-color: #f2d974;
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
 
-#inOverlay{
+#inOverlay {
   height: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 30px;
-  color: #373B44;   
-  
+  color: #373b44;
 }
 
 .restoOnMapName {
@@ -83,18 +103,36 @@ button {
   font-size: 15px;
 }
 
-.overLayRight{
+.overLayCenter {
   overflow: auto;
-  justify-content: left;  
+  justify-content: left;
   padding-left: 30px;
   font-size: 1rem;
+  height: 90vh;
+  margin-top: 10px;
+  width: 30%;
 }
-.overLayLeft{
+.overLayLeft {
   justify-content: center;
   align-items: center;
   padding-left: 30px;
-  width: 50%;
+  width: 40%;
+  text-align: center;
+  margin-top: 10px;
+}
 
+.overLayRight {
+  height: auto;
+  margin-top: 10px;
+  width: 30%;
+  padding-right: auto;
+  padding-left: auto;
+  text-align: center;
+}
+
+.img {
+  height: auto;
+  width: 100%;
 }
 
 .star {
@@ -102,23 +140,20 @@ button {
 }
 
 ::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 
-.pointerYou{
-  background: url(pics/hungry-man.png) no-repeat center center ;
+.pointerYou {
+  background: url(pics/hungry-man.png) no-repeat center center;
   background-size: cover;
-  
 }
 
-.pointerResto{
-  background: url(pics/placeholder.svg) no-repeat center center; 
-  
+.pointerResto {
+  background: url(pics/placeholder.svg) no-repeat center center;
 }
 
-.pointerRestoFeatured{
+.pointerRestoFeatured {
   background: url(pics/maps-and-flags.svg) no-repeat center center;
-
 }
 
 /* Tooltip text */
@@ -130,7 +165,7 @@ display: none;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
- 
+
   position: absolute;
   z-index: 1;
 }
@@ -151,13 +186,221 @@ display: none;
   left: 50%;
   padding: 20px;
   margin-right: -50%;
-  transform: translate(-50%, -50%);  
+  transform: translate(-50%, -50%);
   margin: 0;
-  display: none; /* Hidden by default */ 
-  background-color: rgba(225,184,102,0.7);  
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */  
+  display: none; /* Hidden by default */
+  background-color: rgba(225, 184, 102, 0.7);
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
 
 .hotel_header {
   font-size: 1rem;
+}
+
+/* Large devices (desktops, less than 1100px) 
+    ========================================================*/
+
+@media (max-width: 1099.98px) {
+  .overLayLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .overLayCenter {
+    padding-left: 0px;
+    width: 30%;
+  }
+
+  .button {
+    width: 75%;
+  }
+
+  #list {
+    padding-left: 10px;
+    height: 100%;
+  }
+}
+
+/* Medium devices (tablets, less than 1000px)
+    ========================================================*/
+
+@media (max-width: 999.99px) {
+  .overLayLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .overLayCenter {
+    padding-left: 0px;
+    width: 25%;
+  }
+}
+
+/* Small devices (landscape phones, less than 800px)
+    ==========================================================*/
+
+@media (max-width: 799px) {
+  .overlay {
+    height: auto;
+  }
+
+  .flex-container {
+    height: auto;
+  }
+
+  .overLayLeft {
+    width: 50%;
+    height: auto;
+  }
+
+  .overLayCenter {
+    width: 50%;
+    height: 60vh;
+  }
+
+  .overLayRight {
+    width: 100%;
+    padding-bottom: 17vh;
+  }
+
+  #inOverlay {
+    flex-wrap: wrap;
+  }
+
+  #list {
+    height: 90vh;
+  }
+
+  #findMeButton {
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 646px)
+    ==========================================================*/
+
+@media (max-width: 645.99px) {
+  h1,
+  h2,
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .overLayCenter {
+    height: 50vh;
+  }
+
+  .overLayRight {
+    padding-bottom: 27vh;
+  }
+}
+
+/* Super old small devices (phones, less than 510px)
+    ==========================================================*/
+
+@media (max-width: 509.99px) {
+  h1,
+  h2,
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Super old small devices (phones, less than 410px)
+    ==========================================================*/
+
+@media (max-width: 416px) {
+  .flex-container {
+    display: block;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    padding: 10px 32px;
+  }
+
+  .mapContainer {
+    height: 100vh;
+    width: 100%;
+  }
+
+  #nav {
+    width: 100%;
+  }
+
+  .overlay {
+    width: auto;
+    min-height: 100vh;
+    height: auto;
+  }
+
+  #inOverlay {
+    height: auto;
+    width: auto;
+    display: block;
+    justify-content: space-between;
+    font-size: 20px;
+    color: #373b44;
+  }
+
+  .overLayCenter {
+    width: auto;
+    height: auto;
+    max-height: 20vh;
+    padding-left: 40px;
+    padding-right: auto;
+    justify-content: center;
+  }
+  .overLayLeft {
+    padding-left: 0px;
+    width: auto;
+  }
+  .overLayRight {
+    width: auto;
+    padding-bottom: 0px;
+  }
+
+  .img {
+    height: auto;
+    width: 80%;
+  }
+
+  #list {
+    padding-top: 15px !important;
+    padding-left: 20px;
+    font-size: 0.8rem;
+    overflow: visible;
+    top: 62px;
+    width: 100%;
+  }
+
+  .formInOverlay {
+    background-color: #f2d974;
+    padding-bottom: 10px;
+  }
+
+  #findMeButton {
+    width: 25%;
+  }
 }

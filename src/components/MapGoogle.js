@@ -88,7 +88,6 @@ class MapGoogle extends Component {
 
               this.setState({ aroundRestaurants: restaurants });
               if (results.length === restaurants.length) {
-                console.log("I am sending this:", this.state.aroundRestaurants);
                 this.props.storeRestaurants(this.state.aroundRestaurants);
               }
             }
@@ -114,7 +113,6 @@ class MapGoogle extends Component {
                   lng: e.latLng.lng()
                 }
               });
-              console.log(this.state.clicked);
             } else {
               window.alert("No results found");
             }
@@ -140,13 +138,11 @@ class MapGoogle extends Component {
         rating: "",
         reviews: []
       };
-      console.log(newRestoByUser);
 
       let restaurants = [...this.state.aroundRestaurants];
       restaurants.push(newRestoByUser);
 
       this.setState({ aroundRestaurants: restaurants });
-      console.log(this.state.aroundRestaurants);
 
       this.props.storeRestaurants(restaurants);
     }
@@ -168,6 +164,7 @@ class MapGoogle extends Component {
       case error.UNKNOWN_ERROR:
         alert("An unknown error occurred.");
         break;
+      default:  
         alert("nothing");
     }
   }
@@ -265,7 +262,7 @@ class MapGoogle extends Component {
     }
 
     return (
-      <div style={{ height: "90vh", width: "70%" }}>
+      <div className='mapContainer'>
         <AddnewRestaurant addNewRestaurant={this.saveDataOfInputRestaurant} />
         {this.loadTheMap()}
       </div>
