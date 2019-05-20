@@ -9,9 +9,13 @@ class OneRestorant extends Component {
 		this.state = {
 			urlPic: "",
 			lat: this.props.lat,
-			lng: this.props.lng
+			lng: this.props.lng,
+			reviews: null
 		};
-		this.switchOverlay = this.switchOverlay.bind(this);
+
+		this.switchOverlay = this.switchOverlay.bind(this)
+		this.saveNewComment = this.saveNewComment.bind(this)
+		
 	}
 
 	switchOverlay() {
@@ -21,29 +25,57 @@ class OneRestorant extends Component {
 			oneOverlay.style.display = "none";
 		$(".img").attr("src", "");
 
-		console.log("reviews from One resaurant", this.props.reviews);
-
-		let thisName = this.props.name;
-		document.getElementById(thisName).style.display = "block";
 		fetch(
 			`https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${
 				this.state.lat
 			},${
 				this.state.lng
 			}&fov=90&heading=235&pitch=10&key=AIzaSyDCJD8ghgxEJJdmUIr9_m0mY_wBEUOW5Dw`
-		) // input key here for streetview
-			.then(response => $(".img").attr("src", response.url));
-		//  AIzaSyDCJD8ghgxEJJdmUIr9_m0mY_wBEUOW5Dw
-		// timely:
-		// this.setState({urlPic: 'https://www.muralswallpaper.com/app/uploads/Kids-Pink-Pop-Up-Rabbits-Wallpaper-Mural-Square-400x400.jpg'})
+		) 
+			.then(response => $(".img").attr("src", response.url));		
+
+		if (this.props.type != "featured" && this.state.reviews === null) {
+			console.log("fired serach: map", this.props.map);
+			console.log("fired serach: maps", this.props.maps);
+			let reviews = [];
+
+			var requestDetailed = {
+				placeId: this.props.place_id,
+				fields: ["reviews"]
+			};
+
+			let service2 = new this.props.maps.places.PlacesService(
+				this.props.map
+			);
+
+			service2.getDetails(requestDetailed, (placeDetailed, status) => {
+				if (status === this.props.maps.places.PlacesServiceStatus.OK) {
+					reviews = placeDetailed.reviews;
+					this.setState({
+						reviews: reviews
+					});										
+				} else {
+					console.log(status);
+				}
+			});
+		} else if (this.props.type != "found" && this.state.reviews === null){
+			this.setState({
+				reviews: this.props.reviews
+			});
+		}
+		let thisName = this.props.name;
+		document.getElementById(thisName).style.display = "block";
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.reviews !== this.props.reviews;
+	saveNewComment(list){
+		this.setState(
+		{
+			reviews: list
+		})
 	}
 
 	render() {
-		
+		console.log(this.state);
 		return (
 			<div>
 				<Overlay
@@ -51,10 +83,10 @@ class OneRestorant extends Component {
 					name={this.props.name}
 					address={this.props.address}
 					rating={this.props.rating}
-					reviews={this.props.reviews ? this.props.reviews : []}
+					reviews={this.state.reviews}
+					saveNewComment={this.saveNewComment}
 				/>
 				<HeaderResto
-					className="hotel_header"
 					name={this.props.name}
 					size={this.props.size}
 					href="#"

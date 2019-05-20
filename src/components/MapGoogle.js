@@ -18,7 +18,10 @@ class MapGoogle extends Component {
         address: ""
       },
       zoom: 13,
-      aroundRestaurants: []
+      aroundRestaurants: [],
+      map:'',
+      maps:'',  
+
     };
 
     if (navigator.geolocation) {
@@ -46,6 +49,7 @@ class MapGoogle extends Component {
     this._onChange = this._onChange.bind(this);
     this.loadTheMap = this.loadTheMap.bind(this);
     this.saveDataOfInputRestaurant = this.saveDataOfInputRestaurant.bind(this);
+ //   this.findReviews = this.findReviews.bind(this);
   }
 
   whatIsAround(map, maps) {
@@ -55,46 +59,46 @@ class MapGoogle extends Component {
       type: ["restaurant"]
     };
 
-    let service = new maps.places.PlacesService(map);
+    this.setState(
+    {
+      map: map,
+      maps: maps
+    })
+
+    this.props.getMapObjects(map, maps)
+
+    let service = new maps.places.PlacesService(map);    
 
     //FIND restaurants around
 
     service.nearbySearch(request, (results, status) => {
       if (status === maps.places.PlacesServiceStatus.OK) {
-        for (let place of results) {
-          var requestDetailed = {
-            placeId: place.place_id,
-            fields: ["reviews"]
+        console.log(results)
+        for (let i=0; i<results.length; i++){          
+          let completePlace = {
+            id: results[i].id, 
+            place_id: results[i].place_id,    
+            restaurantName: results[i].name,
+            address: results[i].vicinity,
+            lat: results[i].geometry.location.lat(),
+            lng: results[i].geometry.location.lng(),
+            rating: results[i].rating,         
+            reviews: []
           };
 
           //GRAB DETAILS about restaurants around
 
-          let completePlace = {
-            id: place.id,
-            restaurantName: place.name,
-            address: place.vicinity,
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-            rating: place.rating,
-            reviews: []
-          };
-
-          let service2 = new maps.places.PlacesService(map);
-          service2.getDetails(requestDetailed, (placeDetailed, status) => {
-            if (status === maps.places.PlacesServiceStatus.OK) {
-              completePlace.reviews = placeDetailed.reviews;
-              let restaurants = [...this.state.aroundRestaurants];
-              restaurants.push(completePlace);
-
-              this.setState({ aroundRestaurants: restaurants });
-              if (results.length === restaurants.length) {
-                this.props.storeRestaurants(this.state.aroundRestaurants);
-              }
-            }
-          });
+          let restaurants = [...this.state.aroundRestaurants];
+          restaurants.push(completePlace);          
+          this.setState({ aroundRestaurants: restaurants });   
+          if(results.length === restaurants.length){
+            this.props.storeRestaurants(restaurants);  
+          }       
         }
+      } else {
+        console.log("nothing is stored");
       }
-    });
+    });    
 
     maps.event.addListener(map, "dblclick", e => {
       if (e) {
@@ -124,6 +128,32 @@ class MapGoogle extends Component {
     });
   }
 
+ /* findReviews() {    
+    if(this.props.place_id){
+      console.log('fired serach', this.props.place_id)
+      let reviews = [] 
+    
+      var requestDetailed = {
+        placeId: this.props.place_id,
+        fields: ["reviews"]
+      };
+
+      let service2 = new this.state.maps.places.PlacesService(this.state.map);
+      
+      service2.getDetails(requestDetailed, (placeDetailed, status) => {
+        
+        if (status === this.state.maps.places.PlacesServiceStatus.OK) {
+        
+          reviews = placeDetailed.reviews;
+        } else {
+          console.log(status);
+        }
+      });
+      this.props.passReviews(reviews)      
+    }
+      
+  }
+*/
   saveDataOfInputRestaurant(nameOfAddedResto) {
     if (nameOfAddedResto !== "") {
       $("#addRestForm").css("display", "none");
@@ -144,7 +174,7 @@ class MapGoogle extends Component {
 
       this.setState({ aroundRestaurants: restaurants });
 
-      this.props.storeRestaurants(restaurants);
+      this.props.storeRestaurants(restaurants);      
     }
   }
 
@@ -164,7 +194,7 @@ class MapGoogle extends Component {
       case error.UNKNOWN_ERROR:
         alert("An unknown error occurred.");
         break;
-      default:  
+      default:
         alert("nothing");
     }
   }
@@ -204,7 +234,7 @@ class MapGoogle extends Component {
   }
 
   findRestaurantsAround() {
-    if (this.state.aroundRestaurants.length > 1) {
+    if (this.state.aroundRestaurants.length > 0) {
       let restaurants = this.state.aroundRestaurants.map(resto => (
         <RestoOnMap
           id={resto.id}
@@ -224,6 +254,7 @@ class MapGoogle extends Component {
   }
 
   componentDidMount() {
+    console.log("component mounted");
     this.props.checkZoomFunction(this.state.zoom);
   }
 
@@ -240,7 +271,9 @@ class MapGoogle extends Component {
           onChange={this._onChange}
           defaultZoom={13}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => this.whatIsAround(map, maps)}
+          onGoogleApiLoaded={({ map, maps }) => {
+            this.whatIsAround(map, maps);
+          }}
         >
           <MyPositionElement
             size={this.state.zoom}
@@ -257,12 +290,14 @@ class MapGoogle extends Component {
   }
 
   render() {
+  //  console.log('rerendered', this.props.place_id)
+  //  this.findReviews()       
     {
       $("#findMeButton").click(this.findMeClicked);
     }
 
     return (
-      <div className='mapContainer'>
+      <div className="mapContainer">
         <AddnewRestaurant addNewRestaurant={this.saveDataOfInputRestaurant} />
         {this.loadTheMap()}
       </div>

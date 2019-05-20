@@ -8,8 +8,12 @@ class Overlay extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			reviewList: this.props.reviews
+			reviewList: []
 		};
+
+		this.setState({
+			reviewList: this.props.reviews
+		});
 		this.off = this.off.bind(this);
 		this.reviewListNew = this.reviewListNew.bind(this);
 		this.storeNewReview = this.storeNewReview.bind(this);
@@ -28,10 +32,15 @@ class Overlay extends Component {
 		this.setState({
 			reviewList: listForUpdate
 		});
+		console.log(listForUpdate)
+		this.props.saveNewComment(listForUpdate)
 	}
 
 	reviewListNew() {
-		if (this.state.reviewList.length !== 0) {
+		console.log("func-state", this.state.reviewList);
+		console.log("func-props", this.props.reviews);
+
+		if (this.state.reviewList && this.state.reviewList.length !== 0) {
 			let newComments = this.state.reviewList.map(review => (
 				<OneReview rating={review.rating} text={review.text} />
 			));
@@ -42,17 +51,30 @@ class Overlay extends Component {
 		}
 	}
 
+	static getDerivedStateFromProps(props, state) {
+		if (props.reviews !== state.reviewList) {
+			console.log(props.reviews)
+			console.log(state.reviewList)
+
+			return {
+				reviewList: props.reviews
+			};
+		}
+
+		return null;
+	}
+
 	render() {
+		console.log("render-state", this.state.reviewList);
+		console.log("render-props", this.props.reviews);
+		console.log("overlay", this.state.reviewList);
 		return (
 			<div className="overlay" id={this.props.name}>
 				<div id="inOverlay">
 					<div className="overLayLeft">
 						<h2 onClick={this.off}>{this.props.name}</h2>
 						<p>address: {this.props.address}</p>
-						<img
-							className="img"
-							alt="streetview"							
-						/>
+						<img className="img" alt="streetview" />
 					</div>
 
 					<div className="overLayCenter">
@@ -67,7 +89,7 @@ class Overlay extends Component {
 						<button
 							className="button"
 							style={{
-								height: "50px",								
+								height: "50px",
 								marginTop: "10px"
 							}}
 							onClick={this.off}
@@ -75,7 +97,7 @@ class Overlay extends Component {
 							Back to the map
 						</button>
 						<FormInOverlay
-							reviews={this.props.reviews}
+							reviews={this.state.reviewList}
 							storeNewReview={this.storeNewReview}
 						/>
 					</div>

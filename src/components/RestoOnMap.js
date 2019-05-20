@@ -29,9 +29,9 @@ class RestoOnMap extends Component {
 		) // input key here for streetview
 			.then(response => $(".img").attr("src", response.url));
 
-		//  AIzaSyDCJD8ghgxEJJdmUIr9_m0mY_wBEUOW5Dw
-		// timely:
-		// this.setState({urlPic: 'https://www.muralswallpaper.com/app/uploads/Kids-Pink-Pop-Up-Rabbits-Wallpaper-Mural-Square-400x400.jpg'})
+		let tag = document.getElementById(this.props.id);
+		tag.style.width = `${this.props.size * 2}px`;
+		tag.style.height = `${this.props.size * 2}px`;
 	}
 
 	hoveredResto() {
