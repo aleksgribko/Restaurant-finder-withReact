@@ -49,8 +49,10 @@ class MapGoogle extends Component {
     this._onChange = this._onChange.bind(this);
     this.loadTheMap = this.loadTheMap.bind(this);
     this.saveDataOfInputRestaurant = this.saveDataOfInputRestaurant.bind(this);
- //   this.findReviews = this.findReviews.bind(this);
+
   }
+
+  
 
   whatIsAround(map, maps) {
     let request = {
@@ -72,8 +74,7 @@ class MapGoogle extends Component {
     //FIND restaurants around
 
     service.nearbySearch(request, (results, status) => {
-      if (status === maps.places.PlacesServiceStatus.OK) {
-        console.log(results)
+      if (status === maps.places.PlacesServiceStatus.OK) {        
         for (let i=0; i<results.length; i++){          
           let completePlace = {
             id: results[i].id, 
@@ -83,7 +84,8 @@ class MapGoogle extends Component {
             lat: results[i].geometry.location.lat(),
             lng: results[i].geometry.location.lng(),
             rating: results[i].rating,         
-            reviews: []
+            reviews: [],
+            type: "found"
           };
 
           //GRAB DETAILS about restaurants around
@@ -128,32 +130,6 @@ class MapGoogle extends Component {
     });
   }
 
- /* findReviews() {    
-    if(this.props.place_id){
-      console.log('fired serach', this.props.place_id)
-      let reviews = [] 
-    
-      var requestDetailed = {
-        placeId: this.props.place_id,
-        fields: ["reviews"]
-      };
-
-      let service2 = new this.state.maps.places.PlacesService(this.state.map);
-      
-      service2.getDetails(requestDetailed, (placeDetailed, status) => {
-        
-        if (status === this.state.maps.places.PlacesServiceStatus.OK) {
-        
-          reviews = placeDetailed.reviews;
-        } else {
-          console.log(status);
-        }
-      });
-      this.props.passReviews(reviews)      
-    }
-      
-  }
-*/
   saveDataOfInputRestaurant(nameOfAddedResto) {
     if (nameOfAddedResto !== "") {
       $("#addRestForm").css("display", "none");
@@ -164,9 +140,9 @@ class MapGoogle extends Component {
         restaurantName: nameOfAddedResto,
         address: this.state.clicked.address,
         lat: this.state.clicked.lat,
-        lng: this.state.clicked.lng,
-        rating: "",
-        reviews: []
+        lng: this.state.clicked.lng,        
+        reviews: [],
+        type: "added"
       };
 
       let restaurants = [...this.state.aroundRestaurants];
@@ -228,6 +204,8 @@ class MapGoogle extends Component {
         address={resto.address}
         rating={resto.rating}
         reviews={resto.reviews}
+        switchOverlay={this.props.switchOverlay}
+     
       />
     ));
     return restaurants;
@@ -245,6 +223,8 @@ class MapGoogle extends Component {
           address={resto.address}
           rating={resto.rating}
           reviews={resto.reviews}
+          switchOverlay={this.props.switchOverlay}
+        
         />
       ));
       return restaurants;
@@ -289,9 +269,7 @@ class MapGoogle extends Component {
     }
   }
 
-  render() {
-  //  console.log('rerendered', this.props.place_id)
-  //  this.findReviews()       
+  render() {       
     {
       $("#findMeButton").click(this.findMeClicked);
     }

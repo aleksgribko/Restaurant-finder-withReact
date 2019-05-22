@@ -13,12 +13,13 @@ class OneRestorant extends Component {
 			reviews: null
 		};
 
-		this.switchOverlay = this.switchOverlay.bind(this)
-		this.saveNewComment = this.saveNewComment.bind(this)
-		
+
+		this.switchOverlay = this.switchOverlay.bind(this);
+		this.saveNewComment = this.saveNewComment.bind(this);
+
 	}
 
-	switchOverlay() {
+	switchOverlay() {		
 		//hide all overlays
 		let returnedElemets = document.getElementsByClassName("overlay");
 		for (let oneOverlay of returnedElemets)
@@ -31,12 +32,9 @@ class OneRestorant extends Component {
 			},${
 				this.state.lng
 			}&fov=90&heading=235&pitch=10&key=AIzaSyDCJD8ghgxEJJdmUIr9_m0mY_wBEUOW5Dw`
-		) 
-			.then(response => $(".img").attr("src", response.url));		
-
-		if (this.props.type != "featured" && this.state.reviews === null) {
-			console.log("fired serach: map", this.props.map);
-			console.log("fired serach: maps", this.props.maps);
+		).then(response => $(".img").attr("src", response.url));
+		
+		if (this.props.type === "found" && this.state.reviews === null) {			
 			let reviews = [];
 
 			var requestDetailed = {
@@ -48,36 +46,49 @@ class OneRestorant extends Component {
 				this.props.map
 			);
 
-			service2.getDetails(requestDetailed, (placeDetailed, status) => {
-				if (status === this.props.maps.places.PlacesServiceStatus.OK) {
-					reviews = placeDetailed.reviews;
-					this.setState({
-						reviews: reviews
-					});										
-				} else {
-					console.log(status);
-				}
-			});
-		} else if (this.props.type != "found" && this.state.reviews === null){
+				service2.getDetails(
+					requestDetailed,
+					(placeDetailed, status) => {
+						if (
+							status ===
+							this.props.maps.places.PlacesServiceStatus.OK
+						) {
+
+							reviews = placeDetailed.reviews;
+							this.setState({
+								reviews: reviews ? reviews : []
+							});
+							console.log(this.state.reviews);
+						} else {
+							console.log(status);
+						}
+					}
+				);
+			
+		} else if (this.props.type === "featured" && this.state.reviews === null) {
+			console.log("featured", this.state.reviews);
 			this.setState({
 				reviews: this.props.reviews
 			});
-		}
+		} else if (this.props.type === "added" && this.state.reviews === null){
+			console.log("added", this.state.reviews);
+			this.setState({
+				reviews: []
+			});
+		}		
 		let thisName = this.props.name;
-		document.getElementById(thisName).style.display = "block";
+		document.getElementById(thisName).style.display = "block";		
 	}
 
-	saveNewComment(list){
-		this.setState(
-		{
+	saveNewComment(list) {
+		this.setState({
 			reviews: list
-		})
+		});
 	}
 
-	render() {
-		console.log(this.state);
+	render() {		
 		return (
-			<div>
+			<div class="forFilter" rating={this.props.rating}>
 				<Overlay
 					key={this.props.key}
 					name={this.props.name}
@@ -88,11 +99,10 @@ class OneRestorant extends Component {
 				/>
 				<HeaderResto
 					name={this.props.name}
-					size={this.props.size}
-					href="#"
+					size={this.props.size}				
 					onClick={this.switchOverlay}
-					id={this.props.id}
 					zoom={this.props.zoom}
+					id={this.props.id}
 				/>
 				<div>address: {this.props.address}</div>
 				<div>ratings: {this.props.rating}</div>

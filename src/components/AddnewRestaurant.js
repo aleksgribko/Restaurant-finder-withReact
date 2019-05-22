@@ -29,7 +29,7 @@ class AddnewRestaurant extends Component {
 	render() {
 		return (
 			<div id="addRestForm" style={{ display: "none" }}>
-				<form>
+				<form style={{ display: "block" }}>
 					Type the name of a new restaurant <br />
 					<input
 						type="text"

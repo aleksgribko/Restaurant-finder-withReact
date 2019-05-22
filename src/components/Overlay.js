@@ -31,14 +31,12 @@ class Overlay extends Component {
 		listForUpdate.unshift(newReview);
 		this.setState({
 			reviewList: listForUpdate
-		});
-		console.log(listForUpdate)
+		});		
 		this.props.saveNewComment(listForUpdate)
 	}
 
 	reviewListNew() {
-		console.log("func-state", this.state.reviewList);
-		console.log("func-props", this.props.reviews);
+		
 
 		if (this.state.reviewList && this.state.reviewList.length !== 0) {
 			let newComments = this.state.reviewList.map(review => (
@@ -53,8 +51,7 @@ class Overlay extends Component {
 
 	static getDerivedStateFromProps(props, state) {
 		if (props.reviews !== state.reviewList) {
-			console.log(props.reviews)
-			console.log(state.reviewList)
+			
 
 			return {
 				reviewList: props.reviews
@@ -64,10 +61,7 @@ class Overlay extends Component {
 		return null;
 	}
 
-	render() {
-		console.log("render-state", this.state.reviewList);
-		console.log("render-props", this.props.reviews);
-		console.log("overlay", this.state.reviewList);
+	render() {				
 		return (
 			<div className="overlay" id={this.props.name}>
 				<div id="inOverlay">

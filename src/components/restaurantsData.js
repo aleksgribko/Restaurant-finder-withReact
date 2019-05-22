@@ -16,31 +16,31 @@ const restaurantsData = [
                 text: "Prices could be lower"
             },
             {
-                rating: 4,
+                rating: 3,
+                text: "Didn't like much"
+            },
+            {
+                rating: 2,
+                text: "Prices could be higher"
+            },
+            {
+                rating: 5,
+                text: "Prices could be lower"
+            },
+            {
+                rating: 1,
                 text: "Prices could be lower"
             },
             {
                 rating: 4,
+                text: "Too many people"
+            },
+            {
+                rating: 3,
                 text: "Prices could be lower"
             },
             {
-                rating: 4,
-                text: "Prices could be lower"
-            },
-            {
-                rating: 4,
-                text: "Prices could be lower"
-            },
-            {
-                rating: 4,
-                text: "Prices could be lower"
-            },
-            {
-                rating: 4,
-                text: "Prices could be lower"
-            },
-            {
-                rating: 4,
+                rating: 1,
                 text: "Prices could be lower"
             },
             {

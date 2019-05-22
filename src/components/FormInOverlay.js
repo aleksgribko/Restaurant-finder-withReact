@@ -22,8 +22,7 @@ class FormInOverlay extends Component {
 			this.setState({
 				rating: 0,
 				text: ""
-			});
-			$("form").css("display", "none");
+			});			
 			$("select").val("0");
 			$("textarea").val("");
 		}
@@ -53,8 +52,7 @@ class FormInOverlay extends Component {
 				</button>
 				<form
 					className='formInOverlay'
-					style={{											
-						display: "none",
+					style={{						
 						fontSize: "1rem",						
 						paddingTop: "10px"
 					}}
