@@ -22,16 +22,15 @@ function HeaderResto(props) {
 	}
 
 	return (
-		<a
-			className={props.id}
-			onClick={props.onClick}
+		<span
+			className={`${props.id} linkName`}			
 			onMouseOver={hoveredResto}
 			onMouseOut={unhoveredResto}
 			href="#"
 			onClick={props.onClick}			
 		>
 			Restaurant: {props.name}
-		</a>
+		</span>
 	);
 }
 

@@ -1,7 +1,5 @@
 import React from "react";
 
-import $ from "jquery";
-
 function RestoOnMap(props) {
 	let divClasses = `${
 		props.type === "featured" ? "pointerRestoFeatured" : "pointerResto"
@@ -9,8 +7,8 @@ function RestoOnMap(props) {
  
 	
 	function switchOverlay() {
-		let clicked = props.id		
-		$(`.${clicked}`)[0].click(); 
+		let clicked = props.id				
+		document.getElementsByClassName(`${clicked}`)[0].click(); 
 	}
 
 	function hoveredResto() {

@@ -15,6 +15,18 @@ code {
     monospace;
 }
 
+.linkName {
+  color: #965d62;
+}
+
+.linkName:hover {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
 a {
   color: #965d62;
 }

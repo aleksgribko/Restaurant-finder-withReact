@@ -46,7 +46,7 @@ class FormInOverlay extends Component {
 				<button
 					style={{ height: "50px", marginTop: "10px" }}
 					className="button"
-					onClick={() => $("form").slideToggle(500)}
+					onClick={() => $(".formInOverlay").slideToggle(500)}
 				>
 					Leave a review
 				</button>
@@ -59,8 +59,8 @@ class FormInOverlay extends Component {
 				>
 					<label style={{textAlign: 'center'}}>
 						Rate this restoraunt:
-						<select onChange={this.handleChangeStars} style={{marginLeft: '5px'}}>
-							<option disabled selected value />
+						<select onChange={this.handleChangeStars} style={{marginLeft: '5px'}} defaultValue=''>
+							<option disabled value=''/>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>

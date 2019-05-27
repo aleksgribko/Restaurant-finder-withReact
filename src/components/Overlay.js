@@ -8,12 +8,9 @@ class Overlay extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			reviewList: []
-		};
-
-		this.setState({
 			reviewList: this.props.reviews
-		});
+		};
+		
 		this.off = this.off.bind(this);
 		this.reviewListNew = this.reviewListNew.bind(this);
 		this.storeNewReview = this.storeNewReview.bind(this);
@@ -26,7 +23,9 @@ class Overlay extends Component {
 	}
 
 	storeNewReview(rating, text) {
-		let newReview = new Object({ rating: rating, text: text });
+		let newReview = {};
+		newReview.rating = rating
+		newReview.text = text		
 		let listForUpdate = this.state.reviewList;
 		listForUpdate.unshift(newReview);
 		this.setState({
@@ -39,8 +38,9 @@ class Overlay extends Component {
 		
 
 		if (this.state.reviewList && this.state.reviewList.length !== 0) {
+			let x = 0
 			let newComments = this.state.reviewList.map(review => (
-				<OneReview rating={review.rating} text={review.text} />
+				<OneReview rating={review.rating} text={review.text} key={++x} />
 			));
 
 			return newComments;

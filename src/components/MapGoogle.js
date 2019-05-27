@@ -97,9 +97,7 @@ class MapGoogle extends Component {
             this.props.storeRestaurants(restaurants);  
           }       
         }
-      } else {
-        console.log("nothing is stored");
-      }
+      } 
     });    
 
     maps.event.addListener(map, "dblclick", e => {
@@ -196,6 +194,7 @@ class MapGoogle extends Component {
     let restaurants = restaurantsData.map(resto => (
       <RestoOnMap
         id={resto.id}
+        key={resto.id}
         name={resto.restaurantName}
         lat={resto.lat}
         lng={resto.lng}
@@ -216,6 +215,7 @@ class MapGoogle extends Component {
       let restaurants = this.state.aroundRestaurants.map(resto => (
         <RestoOnMap
           id={resto.id}
+          key={resto.id}
           name={resto.restaurantName}
           lat={resto.lat}
           lng={resto.lng}
@@ -228,13 +228,10 @@ class MapGoogle extends Component {
         />
       ));
       return restaurants;
-    } else {
-      return <div>Loading ....</div>;
-    }
+    } 
   }
 
-  componentDidMount() {
-    console.log("component mounted");
+  componentDidMount() {    
     this.props.checkZoomFunction(this.state.zoom);
   }
 
@@ -269,10 +266,9 @@ class MapGoogle extends Component {
     }
   }
 
-  render() {       
-    {
-      $("#findMeButton").click(this.findMeClicked);
-    }
+  render() {      
+   
+      $("#findMeButton").click(this.findMeClicked);    
 
     return (
       <div className="mapContainer">

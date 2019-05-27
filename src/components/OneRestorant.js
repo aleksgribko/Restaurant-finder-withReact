@@ -57,21 +57,16 @@ class OneRestorant extends Component {
 							reviews = placeDetailed.reviews;
 							this.setState({
 								reviews: reviews ? reviews : []
-							});
-							console.log(this.state.reviews);
-						} else {
-							console.log(status);
-						}
+							});							
+						} 
 					}
 				);
 			
-		} else if (this.props.type === "featured" && this.state.reviews === null) {
-			console.log("featured", this.state.reviews);
+		} else if (this.props.type === "featured" && this.state.reviews === null) {			
 			this.setState({
 				reviews: this.props.reviews
 			});
-		} else if (this.props.type === "added" && this.state.reviews === null){
-			console.log("added", this.state.reviews);
+		} else if (this.props.type === "added" && this.state.reviews === null){			
 			this.setState({
 				reviews: []
 			});
@@ -88,9 +83,9 @@ class OneRestorant extends Component {
 
 	render() {		
 		return (
-			<div class="forFilter" rating={this.props.rating}>
+			<div className="forFilter" rating={this.props.rating}>
 				<Overlay
-					key={this.props.key}
+					key={this.props.id}
 					name={this.props.name}
 					address={this.props.address}
 					rating={this.props.rating}
