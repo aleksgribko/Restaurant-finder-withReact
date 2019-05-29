@@ -31,7 +31,9 @@ class OneRestorant extends Component {
 				this.state.lat
 			},${
 				this.state.lng
-			}&fov=90&heading=235&pitch=10&key=AIzaSyDCJD8ghgxEJJdmUIr9_m0mY_wBEUOW5Dw`
+			}&fov=90&heading=235&pitch=10&key=${
+				this.props.IPkey
+			}`
 		).then(response => $(".img").attr("src", response.url));
 		
 		if (this.props.type === "found" && this.state.reviews === null) {			

@@ -12,7 +12,8 @@ class App extends Component {
       listOfRestaurants: [],
       zoom: 1,
       map: "",
-      maps: ""
+      maps: "",
+      IPkey: "" // put here your Google Maps key
     };
     this.storeRestaurants = this.storeRestaurants.bind(this);
     this.featuredRestaraunts = this.featuredRestaraunts.bind(this);
@@ -52,6 +53,7 @@ class App extends Component {
         reviews={resto.reviews}
         zoom={this.state.zoom}
         key={resto.id}
+        IPkey={this.state.IPkey}
       />
     ));
     return restaurants;
@@ -72,6 +74,7 @@ class App extends Component {
         rating={resto.rating}
         zoom={this.state.zoom}
         key={resto.id}
+        IPkey={this.state.IPkey}
       />
     ));
     return restaurants;
@@ -88,6 +91,7 @@ class App extends Component {
             findReviewsApp={this.findReviewsApp}
             getMapObjects={this.getMapObjects}
             switchOverlay={this.switchOverlay}
+            IPkey={this.state.IPkey}
           />
           <div id="list" style={{ paddingTop: "10px" }}>
             <Filter />

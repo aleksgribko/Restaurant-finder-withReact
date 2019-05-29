@@ -20,7 +20,7 @@ class MapGoogle extends Component {
       zoom: 13,
       aroundRestaurants: [],
       map:'',
-      maps:'',  
+      maps:'',
 
     };
 
@@ -240,7 +240,7 @@ class MapGoogle extends Component {
       return (
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: "AIzaSyDCJD8ghgxEJJdmUIr9_m0mY_wBEUOW5Dw",
+            key: this.props.IPkey,
             libraries: "places"
           }}
           center={this.state.center}
