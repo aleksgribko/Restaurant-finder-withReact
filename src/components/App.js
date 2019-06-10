@@ -13,7 +13,7 @@ class App extends Component {
       zoom: 1,
       map: "",
       maps: "",
-      IPkey: "" // put here your Google Maps key
+      IPkey: process.env.REACT_APP_GOOGLE_API // put here your Google Maps key
     };
     this.storeRestaurants = this.storeRestaurants.bind(this);
     this.featuredRestaraunts = this.featuredRestaraunts.bind(this);

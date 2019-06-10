@@ -26,3 +26,5 @@ node_modules
 .git
 build
 final-project7.zip
+
+.env
