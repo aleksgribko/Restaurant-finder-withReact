@@ -1,7 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project was bootstrapped with Create React App.
-
 ### To check this app you will have to (1) use your google maps API in the state of App.js, (2) have react modules installed and (3) run the app with npm/yarn
 
 ## Specification
